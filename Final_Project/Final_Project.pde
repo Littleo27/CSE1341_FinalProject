@@ -11,9 +11,9 @@ int snakeSize = 5;
 void setup() {
   size(500, 500);
   x = 250;
-  xSpeed = random(-5, 5);
+  xSpeed = random(-2,2);
   y = 250;
-  ySpeed = random(-5, 5);
+  ySpeed = random(-2,2);
   w= 50;
   h = 50;
 }
@@ -26,8 +26,8 @@ void draw() {
 void drawCircle() {
   fill(120, 240, 100);
   ellipse(x, y, w, h);
-  x = x+xSpeed;
-  y = y+ySpeed;
+  x = x + xSpeed; //+random(-2,2);
+  y = y + ySpeed; //+ random(-2,2);
 }
 
 void moveCircle() {
@@ -83,9 +83,21 @@ boolean leftCollision() {
 }
 
 void keyPressed() {
-  for(int i = snakeSize; i>0; i--) {
-   x[i] = x[i-1];
-   y[i] = y[i-1];
+  if (keyCode == UP) {
+    xSpeed = 0;
+    ySpeed = -2;
   }
-  
+  if (keyCode == DOWN) {
+    xSpeed = 0;
+    ySpeed = 2;
+  }
+  if (keyCode == LEFT) {
+    xSpeed = -2;
+    ySpeed = 0;
+  }
+  if (keyCode == RIGHT) {
+    xSpeed = 2;
+    ySpeed = 0;
+  }
 }
+  
