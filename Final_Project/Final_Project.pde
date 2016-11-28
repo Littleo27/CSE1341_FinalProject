@@ -1,103 +1,35 @@
 //Ophelie Herve
 
-float x;
-float xSpeed;
-float y;
-float ySpeed;
-float w;
-float h;
-int snakeSize = 5;
+int z;
+Snake s;
+Apple a;
 
 void setup() {
   size(500, 500);
-  x = 250;
-  xSpeed = random(-2,2);
-  y = 250;
-  ySpeed = random(-2,2);
-  w= 50;
-  h = 50;
+  
+  float x = 250;
+  float xSpeed = random(-2,2);
+  float y = 250;
+  float ySpeed = random(-2,2);
+  float w= 50;
+  float h = 50;
+  s = new Snake(x, y, xSpeed, ySpeed, w, h);
+  float xapple = random(0,500);
+  float yapple = random(0,500);
+  a = new Apple(xapple,yapple,15,15); 
 }
 
 void draw() {
-  drawCircle();
-  moveCircle();
+  background(200);
+  s.drawSnake();
+  a.drawApple();
+  s.moveSnake();
 }
 
-void drawCircle() {
-  fill(120, 240, 100);
-  ellipse(x, y, w, h);
-  x = x + xSpeed; //+random(-2,2);
-  y = y + ySpeed; //+ random(-2,2);
+void keyPressed(){
+  s.keyPressed();
 }
 
-void moveCircle() {
-  if (rightCollision()) {
-    xSpeed = -xSpeed;
-  }
-  if (bottomCollision()) {
-    ySpeed = -ySpeed;
-  }
-  if (topCollision()) {
-    ySpeed = -ySpeed;
-  }
-  if (leftCollision()) {
-    xSpeed = -xSpeed;
-  }
-}
-
-boolean rightCollision() {
-  boolean hasHit = false;
-  if (x + (w/2) >= 500) {
-    hasHit = true;
-  } else {
-    hasHit = false;
-  }  
-  return hasHit;
-}
-boolean bottomCollision() {
-  boolean hasHit = false;
-  if (y + (h/2) >= 500) {
-    hasHit = true;
-  } else {
-    hasHit = false;
-  }  
-  return hasHit;
-}
-boolean topCollision() {
-  boolean hasHit = false;
-  if (y - (h/2) <= 0) {
-    hasHit = true;
-  } else {
-    hasHit = false;
-  }  
-  return hasHit;
-}
-boolean leftCollision() {
-  boolean hasHit = false;
-  if (x - (w/2) <= 0) {
-    hasHit = true;
-  } else {
-    hasHit = false;
-  }  
-  return hasHit;
-}
-
-void keyPressed() {
-  if (keyCode == UP) {
-    xSpeed = 0;
-    ySpeed = -2;
-  }
-  if (keyCode == DOWN) {
-    xSpeed = 0;
-    ySpeed = 2;
-  }
-  if (keyCode == LEFT) {
-    xSpeed = -2;
-    ySpeed = 0;
-  }
-  if (keyCode == RIGHT) {
-    xSpeed = 2;
-    ySpeed = 0;
-  }
-}
-  
+/*void eatApple() {
+  if (x == xapple){
+    snakesize*/
