@@ -1,28 +1,33 @@
 class Snake { 
-  float x;
+  float xSnakeHead;
   float xSpeed;
-  float y;
+  float ySnakeHead;
   float ySpeed;
-  float w;
-  float h;
+  float wSnake;
+  float hSnake;
   int snakeSize = 5;
-  float [] xs = new float[snakeSize];
-  float [] ys = new float[snakeSize];
+  IntList snakeXs;
+  IntList snakeYs;
 
   Snake(float x, float y, float xSpeed, float ySpeed, float w, float h) {
-    this.x = x;
-    this.y = y;
+    this.xSnakeHead = x;
+    this.ySnakeHead = y;
     this.xSpeed = xSpeed;
     this.ySpeed = ySpeed;
-    this.w = w;
-    this.h = h;
+    this.wSnake = w;
+    this.hSnake = h;
   }
 
   void drawSnake() {
     fill(120, 240, 100);
-    ellipse(x, y, w, h);
-    x = x + xSpeed; //+random(-2,2);
-    y = y + ySpeed; //+ random(-2,2);
+
+    snakeXs[0] = xSnakeHead;
+    snakeYs[0] = ySnakeHead;
+    for (i = 0; i<= snakeSize; i++) {
+      ellipse(xSnakeHead, ySnakeHead, wSnake, hSnake);
+      xSnakeHead = xSnakeHead + xSpeed; //+random(-2,2);
+      ySnakeHead = ySnakeHead + ySpeed; //+ random(-2,2);
+    }
   }
 
   void moveSnake() {
@@ -42,7 +47,7 @@ class Snake {
 
   boolean rightCollision() {
     boolean hasHit = false;
-    if (x + (w/2) >= 500) {
+    if (xSnakeHead + (wSnake/2) >= 500) {
       hasHit = true;
     } else {
       hasHit = false;
@@ -51,7 +56,7 @@ class Snake {
   }
   boolean bottomCollision() {
     boolean hasHit = false;
-    if (y + (h/2) >= 500) {
+    if (ySnakeHead + (hSnake/2) >= 500) {
       hasHit = true;
     } else {
       hasHit = false;
@@ -60,7 +65,7 @@ class Snake {
   }
   boolean topCollision() {
     boolean hasHit = false;
-    if (y - (h/2) <= 0) {
+    if (ySnakeHead - (hSnake/2) <= 0) {
       hasHit = true;
     } else {
       hasHit = false;
@@ -69,7 +74,7 @@ class Snake {
   }
   boolean leftCollision() {
     boolean hasHit = false;
-    if (x - (w/2) <= 0) {
+    if (xSnakeHead - (wSnake/2) <= 0) {
       hasHit = true;
     } else {
       hasHit = false;
