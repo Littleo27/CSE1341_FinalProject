@@ -94,5 +94,5 @@ void resetGame() {
   s = new Snake(250, 250);
   float xApple = random(20, width-20);
   float yApple = random(20, height - 20);
-  a = new Apple(xApple, yApple, 10, 10);
+  a = new Apple(xApple, yApple, 15, 15);
 }
