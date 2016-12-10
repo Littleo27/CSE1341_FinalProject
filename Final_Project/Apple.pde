@@ -1,8 +1,8 @@
 class Apple {
   float x;
   float y;
-  float w = 10;
-  float h = 10;
+  float w = 15;
+  float h = 15;
 
   Apple(float x, float y, float w, float h) {
     this.x= x;
@@ -13,6 +13,6 @@ class Apple {
 
   void drawApple() {
     fill(255, 0, 0);
-    ellipse(x, y, w, h);
+    rect(x, y, w, h);
   }
 }

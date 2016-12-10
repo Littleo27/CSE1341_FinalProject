@@ -9,6 +9,8 @@ class Snake {
   IntList snakeYs;
 
   Snake(int x, int y) {
+    //initializing snake
+    //Brittini helped with creating a properly working intlist
     this.xSnakeHead = x;
     this.ySnakeHead = y;
     snakeXs = new IntList();
@@ -19,47 +21,19 @@ class Snake {
     ySpeed = 0;
     wSnake = 15;
     hSnake = 15;
-    //initialBody = 3;
   }
 
   void drawSnake() {
     fill(120, 240, 100);
-    /*int snakeSizeX = snakeXs.get(snakeXs.size() -1);
-    int snakeSizeY = snakeYs.get(snakeYs.size() - 1);
-    if (xSpeed > 0) {      
-      snakeXs.append(snakeSizeX - 15);
-    } else if (xSpeed <0) {
-      snakeXs.append(snakeSizeY + 15);
-    } else {
-      snakeXs.append(snakeSizeX);
-    }
-    if (ySpeed<0) {      
-      snakeYs.append(snakeSizeY + 15);
-    } else if (ySpeed>0) {
-      snakeYs.append(snakeSizeY - 15);
-    } else {
-      snakeYs.append(snakeSizeY);
-    }*/
-
     for (int i = 0; i < snakeXs.size(); i++) {
       rect(snakeXs.get(i), snakeYs.get(i), wSnake, hSnake);
-      /*if (xSpeed >= 0) {
-       snakeXs.append(snakeXs.get(i) -15); 
-       } else
-       snakeXs.append(snakeXs.get(i) + 15);
-       if (ySpeed >= 0) {
-       snakeYs.append(snakeYs.get(i) - 15);
-       } else
-       snakeYs.append(snakeYs.get(i) +15);*/
-      //xSnakeHead = xSnakeHead + xSpeed; //+random(-2,2);
-      //ySnakeHead = ySnakeHead + ySpeed; //+ random(-2,2);
     }
   }
 
   void moveSnake() {
     int currentX = snakeXs.get(0);
     int currentY = snakeYs.get(0);
-    shiftDown();
+    shiftDown(); 
     snakeXs.set(0, currentX + xSpeed);
     snakeYs.set(0, currentY + ySpeed);
 
@@ -83,6 +57,7 @@ class Snake {
   }
 
   boolean rightCollision() {
+    //checking to see if the snake has come into contact with the boundary I created of 20 pixels along the border
     boolean hasHit = false;
     if (snakeXs.get(0) + (wSnake) >= width - 20 && xSpeed >= 0) {
       hasHit = true;
@@ -120,6 +95,7 @@ class Snake {
   }
 
   void shiftDown() {
+    //This ensures that the snake does not leave a trail. Stays a consistent length unless added to. 
     for (int i = snakeXs.size() - 1; i > 0; i--) {
       snakeXs.set(i, snakeXs.get(i-1));
       snakeYs.set(i, snakeYs.get(i-1));
@@ -127,6 +103,7 @@ class Snake {
   }
 
   void addElement() {
+    //Add element to the end of the snake
     int lastX = snakeXs.get(snakeXs.size() - 1);
     int lastY = snakeYs.get(snakeYs.size() - 1);
     if (xSpeed > 0) {      
@@ -145,10 +122,8 @@ class Snake {
     }
   }
 
-
-
-
   void keyPressed() {
+    //when arrows are pressed the snake changes direction
     if (keyCode == UP) {
       xSpeed = 0;
       ySpeed = -15;
