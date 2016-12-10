@@ -5,7 +5,6 @@ class Snake {
   int ySpeed;
   float wSnake;
   float hSnake;
-  //int snakeSize = 5;
   IntList snakeXs;
   IntList snakeYs;
 
@@ -16,16 +15,42 @@ class Snake {
     snakeYs = new IntList();
     snakeXs.append(xSnakeHead);
     snakeYs.append(ySnakeHead);
-    xSpeed = 1;
-    ySpeed = 1;
+    xSpeed = 0;
+    ySpeed = 0;
     wSnake = 15;
     hSnake = 15;
+    //initialBody = 3;
   }
 
   void drawSnake() {
     fill(120, 240, 100);
+    /*int snakeSizeX = snakeXs.get(snakeXs.size() -1);
+    int snakeSizeY = snakeYs.get(snakeYs.size() - 1);
+    if (xSpeed > 0) {      
+      snakeXs.append(snakeSizeX - 15);
+    } else if (xSpeed <0) {
+      snakeXs.append(snakeSizeY + 15);
+    } else {
+      snakeXs.append(snakeSizeX);
+    }
+    if (ySpeed<0) {      
+      snakeYs.append(snakeSizeY + 15);
+    } else if (ySpeed>0) {
+      snakeYs.append(snakeSizeY - 15);
+    } else {
+      snakeYs.append(snakeSizeY);
+    }*/
+
     for (int i = 0; i < snakeXs.size(); i++) {
       rect(snakeXs.get(i), snakeYs.get(i), wSnake, hSnake);
+      /*if (xSpeed >= 0) {
+       snakeXs.append(snakeXs.get(i) -15); 
+       } else
+       snakeXs.append(snakeXs.get(i) + 15);
+       if (ySpeed >= 0) {
+       snakeYs.append(snakeYs.get(i) - 15);
+       } else
+       snakeYs.append(snakeYs.get(i) +15);*/
       //xSnakeHead = xSnakeHead + xSpeed; //+random(-2,2);
       //ySnakeHead = ySnakeHead + ySpeed; //+ random(-2,2);
     }
@@ -59,7 +84,7 @@ class Snake {
 
   boolean rightCollision() {
     boolean hasHit = false;
-    if (snakeXs.get(0) + (wSnake/2) >= 500) {
+    if (snakeXs.get(0) + (wSnake) >= width - 20 && xSpeed >= 0) {
       hasHit = true;
     } else {
       hasHit = false;
@@ -68,7 +93,7 @@ class Snake {
   }
   boolean bottomCollision() {
     boolean hasHit = false;
-    if (snakeYs.get(0) + (hSnake/2) >= 500) {
+    if (snakeYs.get(0) + (hSnake) >= height - 20 && ySpeed >= 0) {
       hasHit = true;
     } else {
       hasHit = false;
@@ -77,7 +102,7 @@ class Snake {
   }
   boolean topCollision() {
     boolean hasHit = false;
-    if (snakeYs.get(0) - (hSnake/2) <= 0) {
+    if (snakeYs.get(0) <= 20 && ySpeed <= 0) {
       hasHit = true;
     } else {
       hasHit = false;
@@ -86,7 +111,7 @@ class Snake {
   }
   boolean leftCollision() {
     boolean hasHit = false;
-    if (snakeXs.get(0) - (wSnake/2) <= 0) {
+    if (snakeXs.get(0) <= 20 && xSpeed <= 0) {
       hasHit = true;
     } else {
       hasHit = false;
